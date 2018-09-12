@@ -22,7 +22,7 @@ void _merge(int* list, int start,int mid, int end){
     int li=start, ri=mid+1;
     
     int temp_index =0;
-    
+    //li와 ri를 비교하여 작거나 큰것을 먼저 temp에 추가
     while(li<=mid && ri <=end){
         if(list[li]<list[ri]){
             temp[temp_index] = list[li++];
@@ -31,7 +31,7 @@ void _merge(int* list, int start,int mid, int end){
         }
         temp_index++;
     }
-    
+    //ri가 먼저 end에 도착할경우 mid의 왼쪽 나머지를 차례대로 temp에 추가 
     if(li<=mid){
         while(li<=mid){
             temp[temp_index] = list[li++];
@@ -39,6 +39,7 @@ void _merge(int* list, int start,int mid, int end){
         }
     }
     
+    //li가 먼저 mid에 도착할경우 mid의 오른쪽 나머지를 차례대로 temp에 추가 
     if(ri<=end){
         while(ri<=end){
             temp[temp_index] = list[ri++];
@@ -46,6 +47,7 @@ void _merge(int* list, int start,int mid, int end){
         }
     }
     
+    //변경된 부분만 list에 적용
     for(int j=start;j<=end;j++){
         list[j] = temp[j-start];
     }
@@ -58,12 +60,14 @@ void _merge_sort(int* list,int start, int end){
     
     //left
     _merge_sort(list,start,mid);
+    
     //right
     _merge_sort(list,mid+1,end);
     
-    
+    //merge
     _merge(list,start,mid,end);
     
+    //print
     print_arr(list);
     
  }
